@@ -1,0 +1,85 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xA7718853934273fddE1407548f8567816670bE74",
+    "txHash": "0xcf97fe934cc14c7e7e5095fc332ba048d0832b54258e88a2fb838a60c458a5e8"
+  },
+  "proxies": [
+    {
+      "address": "0x5D58d904d8f057Ec8B21fb1FD444ac1948B863BA",
+      "txHash": "0x897d85d8ee046e45c14ece913f6cb12f22d1087ace2ee95f8c55d4ce8f5de74e",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "a82b861da2133256e74cfe3570414a7b0cecf43149a0d09d5eb20589ffce08df": {
+      "address": "0x69046B5E67511B0457970BA98d337de5092f1b4d",
+      "txHash": "0x45050f13ea901db8825239a59abf92f7fc508c3e746d485b4f9416bf4d2e32ba",
+      "layout": {
+        "solcVersion": "0.8.9",
+        "storage": [
+          {
+            "label": "x",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "MyImplementationV1",
+            "src": "contracts/MyImplementationV1.sol:5"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "8c24161362cfd51024bb6255d7ceb04d7b1e8df31555ecc26d90d5468731a9ff": {
+      "address": "0x1d816F016c83D4B533aF4b85080E8cAADfA80EAe",
+      "txHash": "0x00b5b1138313374db1f767db91a9553111ddb9c6d1cdc7bc0c163cfb4fc20cb1",
+      "layout": {
+        "solcVersion": "0.8.9",
+        "storage": [
+          {
+            "label": "x",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "MyImplementationV2",
+            "src": "contracts/MyImplementationV2.sol:5"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "56d125e898f35449f9b61da5f5aa4a9307baeb36eca5b9182ae492a3a3a7cd97": {
+      "address": "0x0C45232Ea6Df53e72A1D7cc33399878e9b0bdDbb",
+      "txHash": "0x6bee75c316c8dad7bc7042d04f2dfacd7c17d24fb1393ff8c7ce31ce128f8e98",
+      "layout": {
+        "solcVersion": "0.8.9",
+        "storage": [
+          {
+            "label": "x",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "MyImplementationV2",
+            "src": "contracts/MyImplementationV2.sol:5"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    }
+  }
+}
