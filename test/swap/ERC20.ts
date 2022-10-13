@@ -1,7 +1,7 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers"
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { ethers } from "hardhat"
-import { logTokenBalance, logEthBalance, sign1 } from '../utils'
+import { logTokenBalance, logEthBalance, sign } from '../utils'
 
 import { ERC20 } from '../../typechain-types/contracts/swap/core/test/ERC20'
 import { ERC20__factory } from '../../typechain-types/factories/contracts/swap/core/test/ERC20__factory'
@@ -54,12 +54,12 @@ describe("ERC20", ()=>{
          * user0 100-120
          * user1 100-130
          * user2 100-80
-         * user3 100
-         * user4 100
+         * user3 100-90
+         * user4 100-110
          * user5 100-70
          * 
          * Allowance:
-         * user5 - user4 80-50(
+         * user5 - user4 80-50
          * 
          * Permit:
          * user3 - user2 (user 1 call permit()) (50)
@@ -92,7 +92,7 @@ describe("ERC20", ()=>{
     xit("Should info",async()=>{
         const {deployer, users} = await loadFixture(deployFixture)
         const {token} = await loadFixture(transferFixture)
-        console.log(await token.DOMAIN_SEPARATOR())
+        // console.log(await token.DOMAIN_SEPARATOR())
         console.log(await token.PERMIT_TYPEHASH())
         console.log(await token.allowance(users[5].address, users[4].address))
         console.log(await token.nonces(users[1].address))
@@ -106,7 +106,7 @@ describe("ERC20", ()=>{
         const user3Nonce = await token.nonces(users[3].address)
         const deadline = +(Date.now()/1000).toFixed() + 3*24*60*60
         const value = ethers.utils.parseUnits('50')
-        const signature1 = await sign1(users[3], name, token.address, users[3].address, users[2].address, value,user3Nonce, deadline)
+        const signature1 = await sign(users[3], name, token.address, users[3].address, users[2].address, value,user3Nonce, deadline)
         console.log(signature1)
         const splitedSignature1 = ethers.utils.splitSignature(signature1)
 
@@ -115,6 +115,12 @@ describe("ERC20", ()=>{
         await token.connect(users[1]).permit(users[3].address, users[2].address, value, deadline, splitedSignature1.v, splitedSignature1.r, splitedSignature1.s)
 
         console.log(await token.allowance(users[3].address, users[2].address))
+
+        await token.connect(users[2]).transferFrom(users[3].address, users[4].address, ethers.utils.parseUnits('10'))
+
+        logTokenBalance('user 3', await token.balanceOf(users[3].address))
+
+        logTokenBalance('user 4', await token.balanceOf(users[4].address))
 
     })
 

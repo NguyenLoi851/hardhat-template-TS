@@ -8,6 +8,7 @@ import './libraries/UQ112x112.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './interfaces/IUniswapV2Factory.sol';
 import './interfaces/IUniswapV2Callee.sol';
+import 'hardhat/console.sol';
 
 contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
     using SafeMath  for uint;

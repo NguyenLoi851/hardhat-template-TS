@@ -4,6 +4,9 @@ pragma solidity ^0.8.0;
 import '../../core/interfaces/IUniswapV2Pair.sol';
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "hardhat/console.sol";
+
+import '../../core/UniswapV2Pair.sol';
 
 library UniswapV2Library {
     using SafeMath for uint;
@@ -22,8 +25,10 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f' // init code hash
+                // hex'230dce22ff58fdf52a8b04f415822a52eb86b58538672897f74f3fe89e8ba598' // init code hash
+                keccak256(abi.encodePacked(type(UniswapV2Pair).creationCode))
             )))));
+        // console.logAddress(pair);
     }
 
     // fetches and sorts the reserves for a pair

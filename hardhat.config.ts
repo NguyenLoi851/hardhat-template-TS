@@ -270,7 +270,7 @@ const config: HardhatUserConfig = {
     disambiguatePaths: false,
     runOnCompile: true,
     strict: true,
-    // only: [':Greeter$'],
+    only: [':Greeter$'],
   },
 };
 

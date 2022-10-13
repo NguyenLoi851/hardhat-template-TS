@@ -9,8 +9,7 @@ export function logEthBalance(user: string, balance: ethers.BigNumber){
     console.log("Balance of",user,":", Number(balance)/Number(ethers.utils.parseUnits('1')), 'ETH')
 }
 
-// Do not inherit directly from EIP-712 of openzeppelin
-export const sign1 = async(
+export const sign = async(
     signer: SignerWithAddress,
     name: string, verifyingContract: string,
     owner: string, spender: string, value: ethers.BigNumber,
@@ -43,3 +42,5 @@ export const sign1 = async(
 
     return await signer._signTypedData(domain, types, valueOfTypes)
 }
+
+export const maxUint256 = ethers.BigNumber.from('2').pow(256).sub(1)
