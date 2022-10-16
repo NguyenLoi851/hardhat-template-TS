@@ -13,7 +13,7 @@ import 'solidity-coverage'
 import 'dotenv/config'
 import '@openzeppelin/hardhat-upgrades'
 
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const MUMBAI_API_KEY = process.env.MUMBAI_API_KEY
 const DEPLOYER_PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY
 
@@ -64,7 +64,7 @@ const config: HardhatUserConfig = {
       forking: {
         enabled: process.env.FORKING === 'true',
         url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
-        blockNumber: 11829739,
+        blockNumber: 15759970,
       },
     },
     mainnet: {

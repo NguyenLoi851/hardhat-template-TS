@@ -1,8 +1,8 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { ethers } from "ethers"
 
-export const logTokenBalance = (user: string, balance: ethers.BigNumber)=>{
-    console.log("Balance of",user,":", Number(balance)/Number(ethers.utils.parseUnits('1')), 'token')
+export const logTokenBalance = (user: string, balance: ethers.BigNumber, tokenName: string = '')=>{
+    console.log("Balance of",user,":", Number(balance)/Number(ethers.utils.parseUnits('1')), tokenName, 'token')
 }
 
 export function logEthBalance(user: string, balance: ethers.BigNumber){
