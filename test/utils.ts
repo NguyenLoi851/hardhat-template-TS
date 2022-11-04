@@ -44,3 +44,5 @@ export const sign = async(
 }
 
 export const maxUint256 = ethers.BigNumber.from('2').pow(256).sub(1)
+
+console.log(ethers.utils.hexlify(ethers.utils.toUtf8Bytes("Seaport")))

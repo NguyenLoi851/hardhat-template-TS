@@ -151,7 +151,7 @@ describe("Swap", () => {
     console.log(await calHash.getInitHash());
   });
 
-  xit("Should with token-token-noFeeOnTransfer / add, remove, remove&permit", async () => {
+  it("Should with token-token-noFeeOnTransfer / add, remove, remove&permit", async () => {
     const {
       deployer,
       feeRecipient,

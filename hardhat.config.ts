@@ -12,6 +12,7 @@ import 'hardhat-contract-sizer'
 import 'solidity-coverage'
 import 'dotenv/config'
 import '@openzeppelin/hardhat-upgrades'
+import 'hardhat-gas-reporter'
 
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const MUMBAI_API_KEY = process.env.MUMBAI_API_KEY
@@ -251,7 +252,7 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: MUMBAI_API_KEY,
+    apiKey: ETHERSCAN_API_KEY,
   },
   watcher: {
     compile: {
@@ -272,6 +273,12 @@ const config: HardhatUserConfig = {
     strict: true,
     only: [':Greeter$'],
   },
+  gasReporter: {
+    enabled: false,
+    currency: 'USD',
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY
+  },
+  
 };
 
 export default config;
