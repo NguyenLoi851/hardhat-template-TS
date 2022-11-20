@@ -1,19 +1,19 @@
 import { HardhatRuntimeEnvironment} from 'hardhat/types'
 import { DeployFunction } from 'hardhat-deploy/types'
 
-const deployLock: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
+const deployTokenFactory: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const { ethers, deployments, getNamedAccounts} = hre
     const { deploy } = deployments
     const { deployer } = await getNamedAccounts()
 
-    await deploy('Lock', {
+    await deploy('TokenFactory', {
         from: deployer,
-        args: [ethers.utils.parseUnits('150', 18)],
+        // args: ["Token1","T1"],
         log: true,
         deterministicDeployment: false,
     })
 }
 
-deployLock.tags = ['LOCK']
+deployTokenFactory.tags = ['TOKEN_FACTORY']
 
-export default deployLock
+export default deployTokenFactory

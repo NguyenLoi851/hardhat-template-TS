@@ -15,24 +15,24 @@ const verification: DeployFunction = async(hre: HardhatRuntimeEnvironment) =>{
             }, 15000)
         })
 
-        const lockAddr = (await deployments.get('Lock')).address
+        const erc721TokenAddress = (await deployments.get('Erc721Token')).address
 
         console.log('----- START VERIFICATION -----');
 
         await hre.run('verify:verify', {
-            address: lockAddr,
+            address: erc721TokenAddress,
             constructorArguments: [
-                ethers.utils.parseUnits('150',18)
+                "E721T1","E721T1"
             ],
-            contract: "contracts/Lock.sol:Lock"
+            contract: "contracts/nft/Erc721Token.sol:Erc721Token"
         })    
     } catch (error) {
         console.log(error);
     }
 }
 
-verification.tags = ['VERIFICATION_LOCK']
-verification.dependencies = ['LOCK']
+verification.tags = ['VERIFICATION_ERC721TOKEN']
+verification.dependencies = ['ERC721TOKEN']
 verification.runAtTheEnd = true
 
 export default verification

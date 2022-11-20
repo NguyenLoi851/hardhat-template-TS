@@ -15,24 +15,24 @@ const verification: DeployFunction = async(hre: HardhatRuntimeEnvironment) =>{
             }, 15000)
         })
 
-        const lockAddr = (await deployments.get('Lock')).address
+        const tokenFactoryAddr = (await deployments.get('TokenFactory')).address
 
         console.log('----- START VERIFICATION -----');
 
         await hre.run('verify:verify', {
-            address: lockAddr,
-            constructorArguments: [
-                ethers.utils.parseUnits('150',18)
-            ],
-            contract: "contracts/Lock.sol:Lock"
+            address: tokenFactoryAddr,
+            // constructorArguments: [
+            //     "Token1","T1"
+            // ],
+            contract: "contracts/minimalProxy/TokenFactory.sol:TokenFactory"
         })    
     } catch (error) {
         console.log(error);
     }
 }
 
-verification.tags = ['VERIFICATION_LOCK']
-verification.dependencies = ['LOCK']
+verification.tags = ['VERIFICATION_TOKEN_FACTORY']
+verification.dependencies = ['TOKEN_FACTORY']
 verification.runAtTheEnd = true
 
 export default verification

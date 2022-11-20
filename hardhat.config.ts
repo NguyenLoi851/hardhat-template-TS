@@ -252,7 +252,7 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: ETHERSCAN_API_KEY,
+    apiKey: MUMBAI_API_KEY,
   },
   watcher: {
     compile: {
