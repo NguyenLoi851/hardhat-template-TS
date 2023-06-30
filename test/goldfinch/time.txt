@@ -1,0 +1,78 @@
+Dec-02-2020 03:17:47 AM 3 
+Dec-02-2020 03:26:03 AM 6
+Dec-02-2020 03:27:10 AM 11
+Dec-02-2020 03:29:40 AM 9
+Dec-02-2020 03:30:58 AM 4
+
+Aug-25-2021 06:57:08 PM 16
+Aug-25-2021 07:06:32 PM 1
+Aug-25-2021 07:08:07 PM 14
+Aug-25-2021 08:38:49 PM 8
+Aug-25-2021 09:18:45 PM 13
+Aug-25-2021 09:46:42 PM 7
+Aug-25-2021 10:33:21 PM 15
+Aug-25-2021 10:39:41 PM 12
+Aug-25-2021 10:48:47 PM 10
+Aug-25-2021 10:53:17 PM 5
+Aug-25-2021 10:57:30 PM 2
+
+
+
+Deploy ConfigOptions
+Deploy Fidu
+Deploy Pool
+Deploy GoldfinchFactory
+Deploy CreditDesk
+
+Deploy V2Migrator
+Deploy Accountant
+Deploy TestForwarder
+Deploy GoldfinchConfig
+Deploy SeniorPool
+Deploy FixedLeverageRatioStrategy
+Deploy TranchedPool
+Deploy PoolTokens
+Deploy MigratedTranchedPool
+Deploy CreditLine
+Deploy Borrower
+
+============================================
+
+Goldfinch -> Library: Accountant, ConfigHelper, ConfigOptions
+
+Goldfinch -> GoldfinchConfig
+
+Goldfinch -> PoolTokens
+
+Goldfinch -> implementation for CreditLine, TranchedPool, Borrower
+Goldfinch -> GoldfinchConfig.setCreditLineImplementation
+Goldfinch -> GoldfinchConfig.setGoldfinchConfig
+Goldfinch -> GoldfinchConfig.setBorrowerImplementation
+Goldfinch -> GoldfinchConfig.setAddress ( tranchedPoolImplAddress )
+
+Goldfinch -> GoldfinchFactory
+
+Borrower -> Goldfinch.createBorrower
+-> Borrower.initialize
+
+Goldfinch -> GoldfinchFactory.createPool 
+-> TranchedPool.initialize
+  -> GoldfinchFactory.createCreditLine
+  -> CreditLine.initialize
+  (owner of CreditLine is TranchedPool)
+-> PoolTokens.onPoolCreated
+
+Backers -> TranchedPool.deposit | TranchedPool.depositWithPermit
+-> PoolTokens.mint
+
+Borrower -> Borrower.lockJuniorCapital
+-> TranchedPool.lockJuniorCapital
+
+Borrower -> Borrower.drawdown
+-> TranchedPool.drawdown
+  -> CreditLine.drawdown
+    -> (balance = 0)
+    -> interestAccruedAsOf = timestamp
+    -> lastFullPaymentTime = timestamp
+    -> totalInterestAccrued = 0
+    -> termEndTime = timestamp + SECONDS_PER_DAY * termInDays

@@ -13,6 +13,8 @@ import 'solidity-coverage'
 import 'dotenv/config'
 import '@openzeppelin/hardhat-upgrades'
 import 'hardhat-gas-reporter'
+import "hardhat-tracer"
+// import "@tenderly/hardhat-tenderly";
 
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const MUMBAI_API_KEY = process.env.MUMBAI_API_KEY
@@ -31,18 +33,124 @@ enum CHAIN_IDS {
 }
 
 const config: HardhatUserConfig = {
+  // solidity: {
+  //   compilers: [
+  //     // {
+  //     //   version: '0.8.16',
+  //     //   settings: {
+  //     //     optimizer: {
+  //     //       enabled: true,
+  //     //       runs: 100,
+  //     //       details: {
+  //     //         yul: false
+  //     //       }
+  //     //     },
+  //     //     outputSelection: {
+  //     //       '*': {
+  //     //         '*': ['storageLayout'],
+  //     //       },
+  //     //     },
+  //     //     viaIR : false,
+  //     //   },
+  //     // },
+  //     // {
+  //     //   version: '0.8.9',
+  //     //   settings: {
+  //     //     optimizer: {
+  //     //       enabled: true,
+  //     //       runs: 100,
+  //     //       details: {
+  //     //         yul: false
+  //     //       }
+  //     //     },
+  //     //     outputSelection: {
+  //     //       '*': {
+  //     //         '*': ['storageLayout'],
+  //     //       },
+  //     //     },
+  //     //     viaIR : false,
+  //     //   },
+  //     // },
+  //     // {
+  //     //   version: '0.4.26',
+  //     //   settings: {
+  //     //     optimizer: {
+  //     //       enabled: true,
+  //     //       runs: 100,
+  //     //       details: {
+  //     //         yul: false
+  //     //       }
+  //     //     },
+  //     //     outputSelection: {
+  //     //       '*': {
+  //     //         '*': ['storageLayout'],
+  //     //       },
+  //     //     },
+  //     //   },
+  //     // },
+  //     // {
+  //     //   version: '0.5.5',
+  //     //   settings: {
+  //     //     optimizer: {
+  //     //       enabled: true,
+  //     //       runs: 100,
+  //     //       details: {
+  //     //         yul: false
+  //     //       }
+  //     //     },
+  //     //     outputSelection: {
+  //     //       '*': {
+  //     //         '*': ['storageLayout'],
+  //     //       },
+  //     //     },
+  //     //   },
+  //     // },
+  //     {
+  //       version: '0.8.4',
+  //       settings: {
+  //         optimizer: {
+  //           enabled: true,
+  //           runs: 100,
+  //           // details: {
+  //           //   yul: false
+  //           // }
+  //         },
+  //         outputSelection: {
+  //           '*': {
+  //             '*': ['storageLayout'],
+  //           },
+  //         },
+  //       },
+  //     },
+  //     {
+  //       version: '0.6.12',
+  //       settings: {
+  //         optimizer: {
+  //           enabled: true,
+  //           runs: 100,
+  //           // details: {
+  //           //   yul: false
+  //           // }
+  //         },
+  //         outputSelection: {
+  //           '*': {
+  //             '*': ['storageLayout'],
+  //           },
+  //         },
+  //         // viaIR : false,
+  //       },
+  //     }
+  //   ]
+  // },
   solidity: {
-    version: '0.8.9',
+    // Docs for the compiler https://docs.soliditylang.org/en/v0.8.10/using-the-compiler.html
+    version: '0.8.10',
     settings: {
       optimizer: {
         enabled: true,
-        runs: 100,
+        runs: 100000,
       },
-      outputSelection: {
-        '*': {
-          '*': ['storageLayout'],
-        },
-      },
+      evmVersion: 'london',
     },
   },
   defaultNetwork: 'hardhat',
@@ -64,8 +172,9 @@ const config: HardhatUserConfig = {
       hardfork: process.env.CODE_COVERAGE ? 'berlin' : 'london',
       forking: {
         enabled: process.env.FORKING === 'true',
-        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
-        blockNumber: 15759970,
+        // url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+        url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_2}`,
+        blockNumber: 17428515,
       },
     },
     mainnet: {
@@ -252,7 +361,7 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: MUMBAI_API_KEY,
+    apiKey: ETHERSCAN_API_KEY,
   },
   watcher: {
     compile: {
@@ -261,9 +370,10 @@ const config: HardhatUserConfig = {
       verbose: true,
     },
     test: {
-      tasks: [{ command: 'test', params: { testFiles: [''] } }],
-      files: ['./test/**/*'],
-      verbose: true     
+      // npx hardhat watch test
+      tasks: [{ command: 'test', params: { testFiles: ['test/goldfinch-v2.0/main.spec.ts'] } }],
+      files: ['./test/**/**/*'],
+      verbose: true
     }
   },
   contractSizer: {
@@ -276,9 +386,20 @@ const config: HardhatUserConfig = {
   gasReporter: {
     enabled: false,
     currency: 'USD',
-    coinmarketcap: process.env.COINMARKETCAP_API_KEY
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    gasPrice: 75,
+    // gasPriceApi: 'https://api.bscscan.com/api?module=proxy&action=eth_gasPrice',
+    // token: 'BNB',
+    // currency: 'EUR',
+    // rst: false,
+    // rstTitle: "Title"
   },
-  
+  // not working
+  // may need to login with tenderly cli
+  // tenderly: {
+  //   project: "project",
+  //   username: "LoiNguyen"
+  // }
 };
 
 export default config;

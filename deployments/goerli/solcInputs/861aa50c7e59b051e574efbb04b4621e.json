@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/TTTT.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\ncontract TTTT {\n    string[] public forbiddenSentences;\n\n    function addSentences(string memory _sentences) external {\n        forbiddenSentences.push(_sentences);\n    }\n\n    function deleteSentences(uint _index) external {\n        uint len = forbiddenSentences.length;\n        for (uint i=_index; i<len; ++i){\n            forbiddenSentences[i] = forbiddenSentences[i+1];\n        }\n        forbiddenSentences.pop();\n    }\n\n    function changeSentence(uint _index, string memory _updateSentences) external {\n        forbiddenSentences[_index] = _updateSentences;\n    } \n\n    function reset() external {\n        delete forbiddenSentences;\n    }\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 100
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "storageLayout",
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

@@ -21,9 +21,9 @@ const verification: DeployFunction = async(hre: HardhatRuntimeEnvironment) =>{
 
         await hre.run('verify:verify', {
             address: tokenAddr,
-            constructorArguments: [
-                "Token1","TT1"
-            ],
+            // constructorArguments: [
+            //     "Token1","TT1"
+            // ],
             contract: "contracts/minimalProxy/Token.sol:Token"
         })    
     } catch (error) {

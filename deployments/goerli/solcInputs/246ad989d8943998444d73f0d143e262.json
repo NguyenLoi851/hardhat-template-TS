@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/client-test/ClientTest.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract ClientTest {\n    uint public index;\n\n    error CustomError1(uint number);\n    error CustomError2(uint number);\n\n    function setIndex(uint _number) public {\n        require(_number > 5, \"Error requires\");\n        if(_number <10){\n            revert CustomError1(_number);\n        }\n        if(_number < 20){\n            revert CustomError2(_number);\n        }\n        index = _number;\n    }\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 100
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "storageLayout",
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

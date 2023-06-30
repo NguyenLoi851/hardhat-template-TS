@@ -1,0 +1,104 @@
+{
+  "address": "0x38AcCB8158ADb854B281d2A73fC364fFF3d354dA",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "number",
+          "type": "uint256"
+        }
+      ],
+      "name": "CustomError1",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "number",
+          "type": "uint256"
+        }
+      ],
+      "name": "CustomError2",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "index",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_number",
+          "type": "uint256"
+        }
+      ],
+      "name": "setIndex",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xb97a8a99a4205755d6499d7bc7345618ed149ecb7d0ee9502aaa70a6cd00b491",
+  "receipt": {
+    "to": null,
+    "from": "0x9460b481366b7462af4f7991d430e5eB97FAAEB5",
+    "contractAddress": "0x38AcCB8158ADb854B281d2A73fC364fFF3d354dA",
+    "transactionIndex": 90,
+    "gasUsed": "125641",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x3e24cc3b2c917e80ce37e529d254348d1524d999c532c576482cf615fc0ce265",
+    "transactionHash": "0xb97a8a99a4205755d6499d7bc7345618ed149ecb7d0ee9502aaa70a6cd00b491",
+    "logs": [],
+    "blockNumber": 8151114,
+    "cumulativeGasUsed": "19655002",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "246ad989d8943998444d73f0d143e262",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"number\",\"type\":\"uint256\"}],\"name\":\"CustomError1\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"number\",\"type\":\"uint256\"}],\"name\":\"CustomError2\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"index\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_number\",\"type\":\"uint256\"}],\"name\":\"setIndex\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/client-test/ClientTest.sol\":\"ClientTest\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":100},\"remappings\":[]},\"sources\":{\"contracts/client-test/ClientTest.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ncontract ClientTest {\\n    uint public index;\\n\\n    error CustomError1(uint number);\\n    error CustomError2(uint number);\\n\\n    function setIndex(uint _number) public {\\n        require(_number > 5, \\\"Error requires\\\");\\n        if(_number <10){\\n            revert CustomError1(_number);\\n        }\\n        if(_number < 20){\\n            revert CustomError2(_number);\\n        }\\n        index = _number;\\n    }\\n}\",\"keccak256\":\"0xaebcb1dbe82e46c7f6f7151cbca4c121cc77bb67443b97371b14691ff527df47\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061014f806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80632986c0e51461003b57806340a5737f14610056575b600080fd5b61004460005481565b60405190815260200160405180910390f35b610069610064366004610100565b61006b565b005b600581116100b15760405162461bcd60e51b815260206004820152600e60248201526d4572726f7220726571756972657360901b60448201526064015b60405180910390fd5b600a8110156100d65760405163cc90d7f760e01b8152600481018290526024016100a8565b60148110156100fb5760405163d340b9b360e01b8152600481018290526024016100a8565b600055565b60006020828403121561011257600080fd5b503591905056fea2646970667358221220124ede3ff1f09129c0d44af098af952ccdb3c0b9cd1530f5ec0581e4732c40ee64736f6c63430008090033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80632986c0e51461003b57806340a5737f14610056575b600080fd5b61004460005481565b60405190815260200160405180910390f35b610069610064366004610100565b61006b565b005b600581116100b15760405162461bcd60e51b815260206004820152600e60248201526d4572726f7220726571756972657360901b60448201526064015b60405180910390fd5b600a8110156100d65760405163cc90d7f760e01b8152600481018290526024016100a8565b60148110156100fb5760405163d340b9b360e01b8152600481018290526024016100a8565b600055565b60006020828403121561011257600080fd5b503591905056fea2646970667358221220124ede3ff1f09129c0d44af098af952ccdb3c0b9cd1530f5ec0581e4732c40ee64736f6c63430008090033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3,
+        "contract": "contracts/client-test/ClientTest.sol:ClientTest",
+        "label": "index",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

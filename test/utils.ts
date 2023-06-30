@@ -1,8 +1,8 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
-import { ethers } from "ethers"
+import { BigNumberish, ethers } from "ethers"
 
-export const logTokenBalance = (user: string, balance: ethers.BigNumber, tokenName: string = '')=>{
-    console.log("Balance of",user,":", Number(balance)/Number(ethers.utils.parseUnits('1')), tokenName, 'token')
+export const logTokenBalance = (user: string, balance: ethers.BigNumber, uintNames: BigNumberish = 18, tokenName: string = '')=>{
+    console.log("Balance of",user,":", Number(balance)/Number(ethers.utils.parseUnits('1', uintNames)), tokenName)
 }
 
 export function logEthBalance(user: string, balance: ethers.BigNumber){
@@ -45,6 +45,6 @@ export const sign = async(
 
 export const maxUint256 = ethers.BigNumber.from('2').pow(256).sub(1)
 
-console.log(ethers.utils.hexlify(ethers.utils.toUtf8Bytes("Seaport")))
+// console.log(ethers.utils.hexlify(ethers.utils.toUtf8Bytes("Seaport")))
 
-console.log(ethers.utils.toUtf8Bytes('Seaport'))
+// console.log(ethers.utils.toUtf8Bytes('Seaport'))

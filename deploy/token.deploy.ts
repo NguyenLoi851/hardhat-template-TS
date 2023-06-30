@@ -8,7 +8,7 @@ const deployToken: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
 
     await deploy('Token', {
         from: deployer,
-        args: ["Token1","TT1"],
+        // args: ["Token1","TT1"],
         log: true,
         deterministicDeployment: false,
     })
